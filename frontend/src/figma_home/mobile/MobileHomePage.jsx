@@ -324,73 +324,8 @@ export default function MobileHomePage() {
       {/* ═════════ HOW WE WORK ═════════ */}
       <MobileHowWeWork />
 
-      {/* ═════════ BEFORE & AFTER ═════════ */}
-      {baEnabled && baItems.length > 0 ? (
-        <section className="px-4 pb-12">
-          <div className="text-[12px] uppercase tracking-[0.2em] text-[#FEAE00] mb-3">[ gallery ]</div>
-          <h2 className="text-[28px] leading-[32px] font-bold uppercase text-white">
-            Before and after
-          </h2>
-          <p className="text-[14px] text-white/75 mt-2 mb-5">
-            our clients receive<br />
-            <span className="text-[#FEAE00]">the best service</span>
-          </p>
-
-          <div className="rounded-md overflow-hidden bg-[#0e0e0e] border border-[#1c1c1c] p-2">
-            <div className="grid grid-cols-2 gap-2">
-              <figure>
-                <img
-                  src={baItems[beforeAfterIdx]?.before_image_url || '/mobile/DT-Klausen-LS-135-3@2x.png'}
-                  alt="Before"
-                  className="w-full h-auto block rounded"
-                  loading="lazy"
-                />
-                <figcaption className="text-[11px] uppercase tracking-wider text-[#FEAE00] mt-1">/ before</figcaption>
-              </figure>
-              <figure>
-                <img
-                  src={baItems[beforeAfterIdx]?.after_image_url || '/mobile/DT-Klausen-LS-135-2@2x.png'}
-                  alt="After"
-                  className="w-full h-auto block rounded"
-                  loading="lazy"
-                />
-                <figcaption className="text-[11px] uppercase tracking-wider text-[#FEAE00] mt-1">/ after</figcaption>
-              </figure>
-            </div>
-            {baItems[beforeAfterIdx]?.model ? (
-              <div className="mt-3 text-[13px] text-white/85">
-                <span className="font-bold">{baItems[beforeAfterIdx].model}</span>
-                {baItems[beforeAfterIdx].price ? (
-                  <span className="text-[#FEAE00] ml-2">{baItems[beforeAfterIdx].price}</span>
-                ) : null}
-              </div>
-            ) : null}
-          </div>
-
-          {/* Pager */}
-          <div className="mt-4 flex items-center justify-center gap-4">
-            <button
-              type="button"
-              aria-label="Prev"
-              onClick={() => setBeforeAfterIdx((v) => (v - 1 + baItems.length) % baItems.length)}
-              className="w-9 h-9 rounded-full border border-[#555452] flex items-center justify-center text-white hover:text-[#FEAE00] hover:border-[#FEAE00]"
-            >
-              ←
-            </button>
-            <div className="text-[12px] tabular-nums text-white/70">
-              {String(beforeAfterIdx + 1).padStart(2, '0')}/{String(baItems.length).padStart(2, '0')}
-            </div>
-            <button
-              type="button"
-              aria-label="Next"
-              onClick={() => setBeforeAfterIdx((v) => (v + 1) % baItems.length)}
-              className="w-9 h-9 rounded-full border border-[#555452] flex items-center justify-center text-white hover:text-[#FEAE00] hover:border-[#FEAE00]"
-            >
-              →
-            </button>
-          </div>
-        </section>
-      ) : null}
+      {/* ═════════ HOW TO BUY A TURNKEY CAR — replaces Before & After ═════════ */}
+      <MobileHowToBuyTurnkey />
 
       {/* ═════════ OUR CLIENTS SAY ═════════ */}
       {reviewsEnabled ? (
@@ -2496,6 +2431,475 @@ function MobileHowWeWork() {
             }}
           >
             +359 897 884 804
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
+/* ─────────────────────────────────────────────────────────────────────── */
+/* MobileHowToBuyTurnkey — "How to buy a turnkey car" mobile section
+ *
+ * Geometry (per Figma DevMode @ 368 × 1256):
+ *   • 28 px  top padding
+ *   • 82 px  side padding around the title
+ *   • Title "How to buy / a turnkey car" — Mazzard H Bold 32
+ *   • Top-down car silhouette
+ *   • "from" label — Mazzard H Bold 14, yellow
+ *   • "USA/Korea" — Mazzard H Bold 32, white
+ *   • Auction logos row (Copart, IAAI, CARFAX, Manheim, Encar)
+ *   • 5-step list (block 328 × 276):
+ *       — Yellow numerals "1/" — Mazzard H ExtraBold 20
+ *       — White step text   — Mazzard H Bold 20
+ *       — 40 px left padding for the numeral, 13 px gap to text
+ *       — 18 px vertical gap between items
+ *   • "Pick up the car" CTA — 294 × 45, Mazzard H Medium 14
+ *       — 34 left / 33 right padding, 35 px below the steps
+ *   • 175 px total gap from end of step 5 to "Join our group" caption
+ *   • "Join our group and get the hottest offers" — Bold 16
+ *       — 57 / 55 px side padding
+ *   • 16 px gap to Viber icon (42 × 42)
+ *   • 39 px bottom padding
+ *
+ * Asphalt road background w/ dashed yellow centre line is rendered in CSS.
+ * Brand logos are rendered as inline styled SVG/text marks (no external
+ * assets bundled yet — replace later with real artwork).
+ * ─────────────────────────────────────────────────────────────────────── */
+function MobileHowToBuyTurnkey() {
+  const FONT = "'Mazzard', 'Mazzard H', system-ui, -apple-system, sans-serif";
+
+  const STEPS = [
+    'We send an application',
+    'We discuss the details',
+    'We look for a car',
+    'We buy and deliver to a\nEuropean port',
+    'We clear customs and\ndeliver the car to Bulgaria',
+  ];
+
+  return (
+    <section
+      data-testid="mobile-how-to-buy-turnkey"
+      style={{
+        position: 'relative',
+        background: '#0A0A0A',
+        padding: '28px 0 39px',
+        overflow: 'hidden',
+        boxSizing: 'border-box',
+        width: '100%',
+      }}
+    >
+      {/* ── Asphalt + dashed centre yellow line ──────────────────────── */}
+      <div
+        aria-hidden
+        style={{
+          position: 'absolute',
+          inset: 0,
+          backgroundColor: '#0E0E0E',
+          backgroundImage:
+            'radial-gradient(circle at 50% 0%, rgba(255,255,255,0.025), transparent 65%), radial-gradient(circle at 0% 50%, rgba(255,255,255,0.018), transparent 60%), radial-gradient(circle at 100% 80%, rgba(255,255,255,0.018), transparent 60%)',
+          pointerEvents: 'none',
+        }}
+      />
+      <div
+        aria-hidden
+        style={{
+          position: 'absolute',
+          top: 0,
+          bottom: 0,
+          left: '50%',
+          transform: 'translateX(-50%)',
+          width: 6,
+          backgroundImage:
+            'linear-gradient(#FEAE00 50%, transparent 50%)',
+          backgroundSize: '6px 28px',
+          backgroundRepeat: 'repeat-y',
+          opacity: 0.85,
+          pointerEvents: 'none',
+        }}
+      />
+
+      {/* ── Content ──────────────────────────────────────────────────── */}
+      <div style={{ position: 'relative', zIndex: 1 }}>
+        {/* Title */}
+        <h2
+          style={{
+            margin: 0,
+            padding: '0 82px',
+            textAlign: 'center',
+            fontFamily: FONT,
+            fontWeight: 700,
+            fontSize: 32,
+            lineHeight: '36px',
+            color: '#FEAE00',
+            letterSpacing: '-0.005em',
+          }}
+        >
+          How to buy
+          <br />a turnkey car
+        </h2>
+
+        {/* Top-down car silhouette */}
+        <div
+          aria-hidden
+          style={{
+            marginTop: 56,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: 200,
+          }}
+        >
+          <svg
+            width="120"
+            height="200"
+            viewBox="0 0 120 200"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            style={{ display: 'block' }}
+          >
+            {/* Car body */}
+            <rect x="14" y="12" width="92" height="176" rx="22" fill="#E8E8EA" />
+            {/* Bonnet shadow */}
+            <rect x="20" y="20" width="80" height="60" rx="14" fill="#D2D4D7" />
+            {/* Windshield + roof */}
+            <path
+              d="M28 70 L92 70 C96 70 98 72 98 76 L98 124 C98 128 96 130 92 130 L28 130 C24 130 22 128 22 124 L22 76 C22 72 24 70 28 70 Z"
+              fill="#0F1115"
+              stroke="#2A2D33"
+              strokeWidth="1"
+            />
+            {/* Rear glass / trunk */}
+            <rect x="22" y="138" width="76" height="36" rx="10" fill="#D2D4D7" />
+            {/* Side mirrors */}
+            <rect x="6" y="74" width="10" height="14" rx="2" fill="#D2D4D7" />
+            <rect x="104" y="74" width="10" height="14" rx="2" fill="#D2D4D7" />
+            {/* Front lights */}
+            <rect x="22" y="14" width="12" height="6" rx="2" fill="#FEAE00" />
+            <rect x="86" y="14" width="12" height="6" rx="2" fill="#FEAE00" />
+            {/* Rear lights */}
+            <rect x="22" y="180" width="12" height="6" rx="2" fill="#C0392B" />
+            <rect x="86" y="180" width="12" height="6" rx="2" fill="#C0392B" />
+          </svg>
+        </div>
+
+        {/* "from" label */}
+        <div
+          style={{
+            marginTop: 22,
+            textAlign: 'center',
+            fontFamily: FONT,
+            fontWeight: 700,
+            fontSize: 14,
+            lineHeight: '18px',
+            color: '#FEAE00',
+            letterSpacing: '0.04em',
+          }}
+        >
+          from
+        </div>
+
+        {/* USA/Korea */}
+        <h3
+          style={{
+            margin: '6px 0 0',
+            padding: '0 87px 0 94px',
+            textAlign: 'center',
+            fontFamily: FONT,
+            fontWeight: 700,
+            fontSize: 32,
+            lineHeight: '36px',
+            color: '#FFFFFF',
+            letterSpacing: '-0.005em',
+          }}
+        >
+          USA/Korea
+        </h3>
+
+        {/* Auction logos — 2 rows */}
+        <div
+          style={{
+            marginTop: 36,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: 24,
+            padding: '0 24px',
+          }}
+        >
+          {/* Row 1: Copart · IAAI · CARFAX */}
+          <div
+            style={{
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: 16,
+            }}
+          >
+            {/* Copart — 94 × 40 */}
+            <span
+              aria-label="Copart"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: 94,
+                height: 40,
+                fontFamily: FONT,
+                fontWeight: 700,
+                fontSize: 22,
+                fontStyle: 'italic',
+                color: '#1F4FA4',
+                background: '#FFFFFF',
+                borderRadius: 999,
+                letterSpacing: '-0.01em',
+              }}
+            >
+              Copart
+            </span>
+            {/* IAAI — 51 × 29 */}
+            <span
+              aria-label="IAAI"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: 51,
+                height: 29,
+                fontFamily: FONT,
+                fontWeight: 800,
+                fontSize: 18,
+                color: '#E10600',
+                letterSpacing: '0.02em',
+              }}
+            >
+              IAAI
+            </span>
+            {/* CARFAX — 93 × 17 */}
+            <span
+              aria-label="CARFAX"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 1,
+                height: 17,
+                fontFamily: FONT,
+                fontWeight: 800,
+                fontSize: 12,
+                color: '#FFFFFF',
+                letterSpacing: '0.18em',
+              }}
+            >
+              {'CARFAX'.split('').map((ch, i) => (
+                <span
+                  key={i}
+                  style={{
+                    background: '#000',
+                    border: '1px solid #FFFFFF',
+                    padding: '0 2px',
+                    minWidth: 12,
+                    textAlign: 'center',
+                  }}
+                >
+                  {ch}
+                </span>
+              ))}
+            </span>
+          </div>
+
+          {/* Row 2: Manheim · Encar */}
+          <div
+            style={{
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: 16,
+            }}
+          >
+            {/* Manheim — 118 × 29 */}
+            <span
+              aria-label="Manheim"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 8,
+                height: 29,
+              }}
+            >
+              <span
+                style={{
+                  width: 22,
+                  height: 22,
+                  borderRadius: 999,
+                  background:
+                    'radial-gradient(circle at 35% 30%, #FFD24A, #C68A00 70%, #6A4900 100%)',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#1B1B1B',
+                  fontFamily: FONT,
+                  fontWeight: 800,
+                  fontSize: 14,
+                  lineHeight: 1,
+                }}
+              >
+                M
+              </span>
+              <span
+                style={{
+                  fontFamily: 'Georgia, "Times New Roman", serif',
+                  fontWeight: 400,
+                  fontSize: 22,
+                  color: '#FFFFFF',
+                  fontStyle: 'italic',
+                  letterSpacing: '0.005em',
+                }}
+              >
+                Manheim
+              </span>
+            </span>
+            {/* Encar — 73 × 24 (text) */}
+            <span
+              aria-label="Encar"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: 73,
+                height: 24,
+                fontFamily: FONT,
+                fontWeight: 800,
+                fontSize: 22,
+                color: '#E10600',
+                letterSpacing: '0.01em',
+              }}
+            >
+              Encar
+            </span>
+          </div>
+        </div>
+
+        {/* ── Steps block — 328 × 276 (40 left, 18 gap, 13 number↔text) ─ */}
+        <div
+          style={{
+            marginTop: 60,
+            padding: '0 20px 0 40px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 18,
+            boxSizing: 'border-box',
+          }}
+        >
+          {STEPS.map((s, i) => (
+            <div
+              key={i}
+              style={{
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: 13,
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: FONT,
+                  fontWeight: 800,
+                  fontSize: 20,
+                  lineHeight: '24px',
+                  color: '#FEAE00',
+                  flexShrink: 0,
+                  minWidth: 22,
+                }}
+              >
+                {i + 1}/
+              </span>
+              <span
+                style={{
+                  fontFamily: FONT,
+                  fontWeight: 700,
+                  fontSize: 20,
+                  lineHeight: '24px',
+                  color: '#FFFFFF',
+                  whiteSpace: 'pre-line',
+                }}
+              >
+                {s}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        {/* ── "Pick up the car" CTA — 294 × 45, 34 left / 33 right ───── */}
+        <div style={{ marginTop: 35, padding: '0 33px 0 34px' }}>
+          <button
+            type="button"
+            data-testid="mobile-pick-up-the-car"
+            style={{
+              width: '100%',
+              height: 45,
+              background: '#FEAE00',
+              border: 'none',
+              color: '#000000',
+              fontFamily: FONT,
+              fontWeight: 500,
+              fontSize: 14,
+              letterSpacing: '0.18em',
+              textTransform: 'uppercase',
+              cursor: 'pointer',
+            }}
+          >
+            Pick up the car
+          </button>
+        </div>
+
+        {/* ── 175 px total from end of step 5 to "Join our group".
+             Already used 35 (gap) + 45 (button) = 80 px → remaining 95 px ── */}
+        <div
+          style={{
+            marginTop: 95,
+            padding: '0 55px 0 57px',
+            textAlign: 'center',
+            fontFamily: FONT,
+            fontWeight: 700,
+            fontSize: 16,
+            lineHeight: '22px',
+            color: '#FFFFFF',
+          }}
+        >
+          Join our group and get the hottest offers
+        </div>
+
+        {/* ── Viber icon — 42 × 42, 16 px below caption, 39 px to bottom ── */}
+        <div
+          style={{
+            marginTop: 16,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <a
+            href="viber://chat?number=%2B359875313158"
+            aria-label="Join our Viber group"
+            style={{
+              width: 42,
+              height: 42,
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              textDecoration: 'none',
+            }}
+          >
+            <img
+              src="/mobile/basil-viber-outline.svg"
+              alt=""
+              width={42}
+              height={42}
+              style={{ display: 'block' }}
+            />
           </a>
         </div>
       </div>
