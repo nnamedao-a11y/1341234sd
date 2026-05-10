@@ -2257,14 +2257,14 @@ function MobileHowWeWork() {
         </p>
       </div>
 
-      {/* ── Cards — 17 px sides, 43 px gap between, 91 px gap from sub-title ─ */}
+      {/* ── Cards — 17 px sides, 17 px gap between (symmetric), 91 px gap from sub-title ─ */}
       <div
         style={{
           marginTop: 91,
           padding: '0 17px',
           display: 'flex',
           flexDirection: 'column',
-          gap: 43,
+          gap: 17,
           boxSizing: 'border-box',
         }}
       >
@@ -2421,7 +2421,7 @@ function MobileHowWeWork() {
         <div
           data-testid="mobile-have-a-question"
           style={{
-            marginTop: 31, /* 43 (gap) + 31 = 74 px from end of last plan card */
+            marginTop: 57, /* 17 (gap) + 57 = 74 px from end of last plan card */
             marginBottom: 43, /* bottom padding to next section */
             background: '#000000',
             border: '1px solid #FEAE00',
