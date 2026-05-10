@@ -2561,43 +2561,11 @@ function MobileHowToBuyTurnkey() {
         </h2>
 
         {/* Spacer where the car photo of the bg image sits.
-           The 393 px figure from Figma is "from"-label top relative to
-           section start. Title height ≈ 80 px + 28 px top padding ≈ 108
-           ⇒ remaining ≈ 285 px reserved for the car photo. */}
-        <div aria-hidden style={{ height: 285 }} />
-
-        {/* "from" label — Mazzard H Bold 14, yellow */}
-        <div
-          style={{
-            padding: '0 169px 0 161px',
-            textAlign: 'center',
-            fontFamily: FONT,
-            fontWeight: 700,
-            fontSize: 14,
-            lineHeight: '18px',
-            color: '#FEAE00',
-            letterSpacing: '0.04em',
-          }}
-        >
-          from
-        </div>
-
-        {/* USA/Korea — Mazzard H Bold 32, white */}
-        <h3
-          style={{
-            margin: '6px 0 0',
-            padding: '0 87px 0 94px',
-            textAlign: 'center',
-            fontFamily: FONT,
-            fontWeight: 700,
-            fontSize: 32,
-            lineHeight: '36px',
-            color: '#FFFFFF',
-            letterSpacing: '-0.005em',
-          }}
-        >
-          USA/Korea
-        </h3>
+           Figma: "from"/USA/Korea block is absolutely positioned at top:412
+           from section start (rendered as a direct child of the relative
+           section — see below). The flow spacer reserves the same vertical
+           space so that the auction-logos row stays at its Figma offset. */}
+        <div aria-hidden style={{ height: 345 }} />
 
         {/* ── Auction logos — real SVG assets, exact Figma positioning ─
              Row 1 (Copart 94×40 · IAAI 51×29 · CARFAX 93×17):
@@ -2796,6 +2764,66 @@ function MobileHowToBuyTurnkey() {
             />
           </a>
         </div>
+      </div>
+
+      {/* ── "from / USA/Korea" — absolutely positioned per Figma ──
+           • USA/Korea text frame: 180 × 38 px.
+           • Top:    412 px from card (section) start — where the car image
+                      conceptually begins (per Figma DevMode).
+           • Left:    94 px from section edge.
+           • Right:   87 px (94 + 180 + 87 = 361 px card content width).
+           • "from"   Mazzard H Bold 14 px, #FEAE00, centered, sits directly
+                      above USA/Korea.
+           • "USA/Korea" Mazzard H Bold 32 px, #FFFFFF, centered, 180 × 38.
+           Rendered as a DIRECT child of the relative <section>, therefore
+           `top` is measured from the section's padding-box top (= card top).
+         ─────────────────────────────────────────────────────────── */}
+      <div
+        data-testid="mobile-from-usa-korea"
+        style={{
+          position: 'absolute',
+          top: 412,
+          left: 94,
+          width: 180,
+          zIndex: 2,
+          pointerEvents: 'none',
+        }}
+      >
+        <div
+          style={{
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            bottom: '100%',
+            marginBottom: 2,
+            fontFamily: FONT,
+            fontWeight: 700,
+            fontSize: 14,
+            lineHeight: '17px',
+            color: '#FEAE00',
+            letterSpacing: '0.04em',
+            textAlign: 'center',
+          }}
+        >
+          from
+        </div>
+        <h3
+          style={{
+            margin: 0,
+            width: 180,
+            height: 38,
+            fontFamily: FONT,
+            fontWeight: 700,
+            fontSize: 32,
+            lineHeight: '38px',
+            color: '#FFFFFF',
+            letterSpacing: '-0.005em',
+            textAlign: 'center',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          USA/Korea
+        </h3>
       </div>
     </section>
   );
