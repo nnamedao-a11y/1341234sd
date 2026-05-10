@@ -2456,8 +2456,9 @@ function MobileHowToBuyTurnkey() {
            This is image0_340_2643 — the raw aerial road photo WITHOUT any
            text or logos; everything else (title, USA/Korea, auction logos,
            steps, button, caption) is rendered as live React markup above it.
-           Stretched with object-fit:fill to match the SVG pattern behaviour
-           (360 × 1256). ───────────────────────────────────────────────── */}
+           object-fit:cover preserves the road's natural aspect ratio so the
+           white side stripes and the central double-yellow lane lines stay
+           geometrically correct. ─────────────────────────────────────── */}
       <img
         src="/figma/turnkey-road-bg.webp"
         alt=""
@@ -2468,21 +2469,10 @@ function MobileHowToBuyTurnkey() {
           left: 0,
           width: '100%',
           height: '100%',
-          objectFit: 'fill',
+          objectFit: 'cover',
+          objectPosition: 'center top',
           pointerEvents: 'none',
           userSelect: 'none',
-        }}
-      />
-      {/* Subtle dark overlay (paint0_linear from Figma, opacity 0.2)
-          — keeps all text legible on light asphalt patches. */}
-      <div
-        aria-hidden
-        style={{
-          position: 'absolute',
-          inset: 0,
-          background:
-            'linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.25) 100%)',
-          pointerEvents: 'none',
         }}
       />
 
