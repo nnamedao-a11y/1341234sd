@@ -2599,72 +2599,76 @@ function MobileHowToBuyTurnkey() {
           USA/Korea
         </h3>
 
-        {/* ── Auction logos — real assets from /figma ─────────────────── */}
-        <div
-          style={{
-            marginTop: 38,
-            padding: '0 24px',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 24,
-            alignItems: 'center',
-          }}
-        >
-          {/* Row 1 — Copart 94×40 · IAAI 51×29 · CARFAX 93×17 */}
+        {/* ── Auction logos — real SVG assets, exact Figma positioning ─
+             Row 1 (Copart 94×40 · IAAI 51×29 · CARFAX 93×17):
+               • Copart  → padding-left  35 px from section edge
+               • CARFAX  → padding-right 31 px from section edge
+               • IAAI    → centred between (159 / 151), vertically centred
+                            with Copart (40 px tall row baseline)
+             Row 2 (Manheim 118×30 · Encar 74×22), 33 px below row 1:
+               • Manheim → padding-left  43 px
+               • Encar   → padding-right 60 px
+             Vertical position from section start: 493 px (Figma).
+          ────────────────────────────────────────────────────────────── */}
+        <div style={{ marginTop: 38 }}>
+          {/* Row 1 — fixed 40 px height so all three are vertically centred */}
           <div
             style={{
-              width: '100%',
+              padding: '0 31px 0 35px',
+              height: 40,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              gap: 16,
+              boxSizing: 'border-box',
             }}
           >
             <img
-              src="/figma/image-65@2x.webp"
+              src="/figma/copart-logo.svg"
               alt="Copart"
               width={94}
               height={40}
-              style={{ width: 94, height: 40, objectFit: 'contain', display: 'block' }}
+              style={{ width: 94, height: 40, display: 'block', flexShrink: 0 }}
             />
             <img
-              src="/figma/image-73@2x.webp"
+              src="/figma/iaai-logo.svg"
               alt="IAA — Insurance Auto Auctions"
               width={51}
               height={29}
-              style={{ width: 51, height: 29, objectFit: 'contain', display: 'block' }}
+              style={{ width: 51, height: 29, display: 'block', flexShrink: 0 }}
             />
             <img
-              src="/figma/image-71@2x.webp"
+              src="/figma/carfax-logo.svg"
               alt="CARFAX"
               width={93}
               height={17}
-              style={{ width: 93, height: 17, objectFit: 'contain', display: 'block' }}
+              style={{ width: 93, height: 17, display: 'block', flexShrink: 0 }}
             />
           </div>
-          {/* Row 2 — Manheim 118×29 · Encar 73×24 */}
+          {/* Row 2 — 33 px gap from row 1, fixed 30 px height */}
           <div
             style={{
-              width: '100%',
+              marginTop: 33,
+              padding: '0 60px 0 43px',
+              height: 30,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              gap: 16,
+              boxSizing: 'border-box',
             }}
           >
             <img
-              src="/figma/image-76@2x.webp"
+              src="/figma/manheim-logo.svg"
               alt="Manheim"
               width={118}
-              height={29}
-              style={{ width: 118, height: 29, objectFit: 'contain', display: 'block' }}
+              height={30}
+              style={{ width: 118, height: 30, display: 'block', flexShrink: 0 }}
             />
             <img
-              src="/figma/image-81@2x.webp"
+              src="/figma/encar-logo.svg"
               alt="Encar"
-              width={73}
-              height={24}
-              style={{ width: 73, height: 24, objectFit: 'contain', display: 'block' }}
+              width={74}
+              height={22}
+              style={{ width: 74, height: 22, display: 'block', flexShrink: 0 }}
             />
           </div>
         </div>
