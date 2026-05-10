@@ -2452,50 +2452,36 @@ function MobileHowToBuyTurnkey() {
         minHeight: 1262,
       }}
     >
-      {/* ── Aerial road photo as full-bleed background ───────────────── */}
+      {/* ── Figma-supplied road background (extracted from Frame 1707479322.
+           This is image0_340_2643 — the raw aerial road photo WITHOUT any
+           text or logos; everything else (title, USA/Korea, auction logos,
+           steps, button, caption) is rendered as live React markup above it.
+           Stretched with object-fit:fill to match the SVG pattern behaviour
+           (360 × 1256). ───────────────────────────────────────────────── */}
       <img
-        src="/figma/image-57@2x.webp"
+        src="/figma/turnkey-road-bg.webp"
         alt=""
         aria-hidden="true"
         style={{
           position: 'absolute',
           top: 0,
-          left: '50%',
-          transform: 'translateX(-50%)',
+          left: 0,
+          width: '100%',
           height: '100%',
-          width: 'auto',
-          minWidth: '100%',
-          objectFit: 'cover',
-          objectPosition: 'center top',
+          objectFit: 'fill',
           pointerEvents: 'none',
           userSelect: 'none',
         }}
       />
-      {/* Top fade so the title remains legible on light asphalt */}
+      {/* Subtle dark overlay (paint0_linear from Figma, opacity 0.2)
+          — keeps all text legible on light asphalt patches. */}
       <div
         aria-hidden
         style={{
           position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          height: 220,
+          inset: 0,
           background:
-            'linear-gradient(180deg, rgba(10,10,10,0.85) 0%, rgba(10,10,10,0.55) 60%, rgba(10,10,10,0) 100%)',
-          pointerEvents: 'none',
-        }}
-      />
-      {/* Bottom fade for the CTA / Join card legibility */}
-      <div
-        aria-hidden
-        style={{
-          position: 'absolute',
-          left: 0,
-          right: 0,
-          bottom: 0,
-          height: 320,
-          background:
-            'linear-gradient(0deg, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.65) 55%, rgba(10,10,10,0) 100%)',
+            'linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.25) 100%)',
           pointerEvents: 'none',
         }}
       />
