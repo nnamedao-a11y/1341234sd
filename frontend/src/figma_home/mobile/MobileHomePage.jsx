@@ -328,63 +328,8 @@ export default function MobileHomePage() {
       {/* ═════════ HOW TO BUY A TURNKEY CAR — replaces Before & After ═════════ */}
       <MobileHowToBuyTurnkey />
 
-      {/* ═════════ OUR CLIENTS SAY ═════════ */}
-      {reviewsEnabled ? (
-        <section className="px-4 pb-12">
-          <div className="text-[12px] uppercase tracking-[0.2em] text-[#FEAE00] mb-3">[ reviews ]</div>
-          <h2 className="text-[28px] leading-[32px] font-bold uppercase text-white">our clients say</h2>
-          <p className="text-[14px] text-white/75 mt-2 mb-5">
-            Satisfied clients<br />
-            <span className="text-[#FEAE00]">are our priority</span>
-          </p>
-
-          <div className="bg-[#0e0e0e] border border-[#1c1c1c] rounded-md p-5">
-            {/* Google rating header */}
-            <div className="flex items-center gap-3 mb-4">
-              <div className="text-[28px] font-bold text-white tabular-nums">{Number(googleRating).toFixed(1)}</div>
-              <div className="flex items-center text-[#FEAE00]">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <span key={i} aria-hidden>★</span>
-                ))}
-              </div>
-              <div className="text-[12px] text-white/60">{googleReviewsCount} Google reviews</div>
-            </div>
-
-            {/* Active review */}
-            <div className="text-[13px] leading-[20px] text-white/85 italic">
-              "{reviews[reviewIdx]?.text || ''}"
-            </div>
-            <div className="mt-3 text-[14px] font-bold text-[#FEAE00]">
-              — {reviews[reviewIdx]?.name || ''}
-            </div>
-          </div>
-
-          {/* Pager */}
-          {reviews.length > 1 ? (
-            <div className="mt-4 flex items-center justify-center gap-4">
-              <button
-                type="button"
-                aria-label="Prev review"
-                onClick={() => setReviewIdx((v) => (v - 1 + reviews.length) % reviews.length)}
-                className="w-9 h-9 rounded-full border border-[#555452] flex items-center justify-center text-white hover:text-[#FEAE00] hover:border-[#FEAE00]"
-              >
-                ←
-              </button>
-              <div className="text-[12px] tabular-nums text-white/70">
-                {String(reviewIdx + 1).padStart(2, '0')}/{String(reviews.length).padStart(2, '0')}
-              </div>
-              <button
-                type="button"
-                aria-label="Next review"
-                onClick={() => setReviewIdx((v) => (v + 1) % reviews.length)}
-                className="w-9 h-9 rounded-full border border-[#555452] flex items-center justify-center text-white hover:text-[#FEAE00] hover:border-[#FEAE00]"
-              >
-                →
-              </button>
-            </div>
-          ) : null}
-        </section>
-      ) : null}
+      {/* ═════════ WE HAVE PERFECT SERVICE — replaces former Reviews block ═════════ */}
+      <MobileWeHavePerfectService />
 
       {/* ═════════ DREAM CAR CTA ═════════ */}
       <section className="px-4 pb-12">
@@ -2875,6 +2820,199 @@ function MobileHowToBuyTurnkey() {
         >
           USA/Korea
         </h3>
+      </div>
+    </section>
+  );
+}
+
+
+/* ─────────────────────────────────────────────────────────────────────── */
+/* MobileWeHavePerfectService                                              */
+/*                                                                         */
+/* Mobile adaptation of FrameComponent24 ("WE HAVE PERFECT SERVICE").      */
+/* Reuses the exact same content (titles, subtitles, map-pin icon) and     */
+/* typography family as the desktop version, but with the mobile geometry  */
+/* given by Figma DevMode (card 360 × 901):                                */
+/*                                                                         */
+/*   • Card                       360 × 901, padding-top 59                */
+/*   • Title block "We have perfect / service"                             */
+/*       - 274 × 109, centred                                              */
+/*       - "WE HAVE PERFECT SERVICE" — H Bold 24 px, #FEAE00, uppercase    */
+/*       - "JUST A FEW STEPS / TO YOUR DREAM CAR" — H Medium 16 px, white  */
+/*       - Side padding 43 / 43                                            */
+/*   • 4 step blocks                                                       */
+/*       - Each block 328 × 114.47                                         */
+/*       - Map-pin icon (28 × 28, #FEAE00), centred above an orange        */
+/*         hairline that spans the full width of the block                 */
+/*       - Title text — H Bold 16 px, uppercase, white                     */
+/*       - Subtitle  — H Medium 14 px, #FEAE00                             */
+/*       - 16 px gap between map-pin/line and title                        */
+/*       - 16 px gap between title and subtitle                            */
+/*       - 48 px gap between each step block                               */
+/* ─────────────────────────────────────────────────────────────────────── */
+
+const PERFECT_SERVICE_STEPS = [
+  {
+    title: 'Choose your perfect car',
+    subtitle: 'Find a vehicle that matches your style and budget',
+  },
+  {
+    title: 'Pay quickly and effortlessly',
+    subtitle: 'A simple, transparent process with no complications',
+  },
+  {
+    title: 'Track your car\nin real time',
+    subtitle: 'Stay updated on every step of the journey in your personal account',
+  },
+  {
+    title: 'Get the keys and enjoy your new car',
+    subtitle: 'Our manager will hand over the vehicle and take care of every detail',
+  },
+];
+
+function MobileWeHavePerfectService() {
+  const FONT = "'Mazzard', 'Mazzard H', system-ui, -apple-system, sans-serif";
+
+  return (
+    <section
+      data-testid="mobile-perfect-service"
+      style={{
+        position: 'relative',
+        background: '#000000',
+        width: '100%',
+        minHeight: 901,
+        paddingTop: 59,
+        paddingBottom: 48,
+        boxSizing: 'border-box',
+        color: '#FFFFFF',
+        fontFamily: FONT,
+      }}
+    >
+      {/* ── Title block — 274 × 109, centred, 43 px side padding ── */}
+      <div
+        data-testid="mobile-perfect-service-title-block"
+        style={{
+          width: '100%',
+          padding: '0 43px',
+          boxSizing: 'border-box',
+          textAlign: 'center',
+        }}
+      >
+        <h2
+          style={{
+            margin: 0,
+            fontFamily: FONT,
+            fontWeight: 700,
+            fontSize: 24,
+            lineHeight: '28px',
+            letterSpacing: 0,
+            textTransform: 'uppercase',
+            color: '#FEAE00',
+          }}
+        >
+          We have perfect service
+        </h2>
+        <div
+          style={{
+            marginTop: 16,
+            fontFamily: FONT,
+            fontWeight: 500,
+            fontSize: 16,
+            lineHeight: '20px',
+            letterSpacing: 0,
+            textTransform: 'uppercase',
+            color: '#FFFFFF',
+          }}
+        >
+          Just a few steps
+          <br />
+          to your dream car
+        </div>
+      </div>
+
+      {/* ── 4 step blocks — 328 × 114.47, 48 px gap between ── */}
+      <div
+        data-testid="mobile-perfect-service-steps"
+        style={{
+          marginTop: 59,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 48,
+          alignItems: 'center',
+        }}
+      >
+        {PERFECT_SERVICE_STEPS.map((step, i) => (
+          <div
+            key={i}
+            data-testid={`mobile-perfect-service-step-${i + 1}`}
+            style={{
+              width: 328,
+              maxWidth: 'calc(100% - 32px)',
+              boxSizing: 'border-box',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              textAlign: 'center',
+            }}
+          >
+            {/* Map-pin icon (uses the desktop weui-location-filled asset) */}
+            <img
+              src="/figma/weui-location-filled.svg"
+              alt=""
+              width={28}
+              height={28}
+              style={{
+                width: 28,
+                height: 28,
+                display: 'block',
+                marginBottom: 4,
+              }}
+              aria-hidden="true"
+            />
+
+            {/* Horizontal hairline — full width of the 328-px block */}
+            <div
+              aria-hidden="true"
+              style={{
+                width: '100%',
+                height: 1,
+                background: '#FEAE00',
+              }}
+            />
+
+            {/* Title — Bold 16, white, uppercase. 16 px below the hairline. */}
+            <h3
+              style={{
+                margin: '16px 0 0 0',
+                fontFamily: FONT,
+                fontWeight: 700,
+                fontSize: 16,
+                lineHeight: '20px',
+                letterSpacing: 0,
+                textTransform: 'uppercase',
+                color: '#FFFFFF',
+                whiteSpace: 'pre-line',
+              }}
+            >
+              {step.title}
+            </h3>
+
+            {/* Subtitle — Medium 14, amber. 16 px below the title. */}
+            <p
+              style={{
+                margin: '16px 0 0 0',
+                fontFamily: FONT,
+                fontWeight: 500,
+                fontSize: 14,
+                lineHeight: '18px',
+                letterSpacing: 0,
+                color: '#FEAE00',
+              }}
+            >
+              {step.subtitle}
+            </p>
+          </div>
+        ))}
       </div>
     </section>
   );
