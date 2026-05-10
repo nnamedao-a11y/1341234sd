@@ -1,0 +1,30 @@
+[
+  {
+    "content": "Backup existing .env files",
+    "status": "completed"
+  },
+  {
+    "content": "Copy repo source files to /app preserving .env",
+    "status": "completed"
+  },
+  {
+    "content": "Install backend Python dependencies",
+    "status": "completed"
+  },
+  {
+    "content": "Install frontend Node dependencies",
+    "status": "completed"
+  },
+  {
+    "content": "Restart services and verify backend/frontend boot",
+    "status": "completed"
+  },
+  {
+    "content": "Smoke test - hit /api endpoint, load frontend",
+    "status": "completed"
+  },
+  {
+    "content": "Take screenshot to verify UI renders",
+    "status": "completed"
+  }
+]

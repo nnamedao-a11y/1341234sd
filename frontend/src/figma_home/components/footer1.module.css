@@ -1,0 +1,476 @@
+.footer {
+  width: 100%;
+  background-color: var(--color-black);
+  overflow: hidden;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 110px 100px 33px 100px;
+  box-sizing: border-box;
+  gap: 80px;
+  z-index: 10;
+}
+.footerContent,
+.footerTop {
+  height: 605.7px;
+  display: flex;
+}
+.footerContent {
+  width: 1462px;
+  align-items: flex-start;
+  padding: var(--padding-0) var(--padding-0) var(--padding-0) 3.5px;
+  box-sizing: border-box;
+  z-index: 2;
+}
+.footerTop {
+  width: 1458.5px;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 110.1px;
+}
+.bibiLogo021Parent {
+  width: 1458.5px;
+  height: 145.9px;
+  display: flex;
+  align-items: flex-start;
+  gap: 430px;
+  text-align: left;
+  font-size: var(--fs-14);
+  color: var(--color-white);
+  font-family: var(--font-mazzard);
+}
+.bibiLogo021Icon {
+  height: 145.9px;
+  width: 427px;
+  position: relative;
+  z-index: 2;
+}
+.contactDetails {
+  height: 120px;
+  width: 601.5px;
+  flex-direction: column;
+  padding: var(--padding-19) var(--padding-0) var(--padding-0);
+  box-sizing: border-box;
+  z-index: 1;
+}
+.contactColumn,
+.contactDetails,
+.phoneInfo {
+  display: flex;
+  align-items: flex-start;
+}
+.contactColumn {
+  width: 601.5px;
+  height: auto;
+  min-height: 101px;
+  gap: 64px;
+  align-items: flex-start;
+}
+.phoneInfo {
+  /* Widened so the phone numbers (24px Mazzard H Medium) never wrap.
+     "+359 875 313 158" / "+359 897 884 804" need ~210px each at 24/500. */
+  width: auto;
+  min-width: 260px;
+  flex-direction: column;
+  gap: var(--gap-24);
+  flex-shrink: 0;
+}
+.phoneNumber,
+.phoneNumber2 {
+  align-self: stretch;
+  position: relative;
+  text-transform: capitalize;
+  font-family: 'Mazzard H', var(--font-mazzard);
+  font-weight: 500;            /* H Medium */
+}
+.phoneNumber {
+  /* "Phone Number:" label — 18 / Medium per Figma. */
+  font-size: var(--fs-18);
+  line-height: 99.9%;
+}
+.phoneNumber2 {
+  /* Each phone number on ONE line — never wrap. 24 / Medium per Figma. */
+  font-size: var(--fs-24);
+  line-height: 130%;
+  color: var(--color-orange-100);
+  white-space: nowrap;
+}
+.phoneNumber2 a,
+.phoneNumber2 span {
+  white-space: nowrap;
+}
+.buttonWrapper,
+.servicesLink {
+  display: flex;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+.buttonWrapper {
+  height: 73px;
+  width: var(--width-171);
+  flex-direction: column;
+  padding: var(--padding-28) var(--padding-0) var(--padding-0);
+}
+.servicesLink {
+  width: 1196.5px;
+  height: 349.7px;
+  justify-content: flex-end;
+  padding: var(--padding-0) 31.5px var(--padding-0) var(--padding-0);
+  text-align: left;
+  font-size: var(--fs-24);
+  color: var(--color-whitesmoke);
+  font-family: var(--font-mazzard);
+}
+.serviceLinks {
+  height: 349.7px;
+  width: 1165px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 28.8px;
+}
+.footerLinks {
+  width: 1165px;
+  height: 226px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: var(--padding-0) var(--padding-8) var(--padding-0) var(--padding-0);
+  box-sizing: border-box;
+  z-index: 2;
+}
+.linkColumn {
+  height: 226px;
+  width: 1157px;
+  display: flex;
+  align-items: flex-end;
+  gap: 428px;
+}
+.footerLinksColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 38px;
+}
+.catalog {
+  margin: 0;
+  position: relative;
+  font-size: inherit;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-family: inherit;
+}
+.addressDetails {
+  width: auto;
+  min-width: 564px;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--padding-0) var(--padding-0) 41.8px;
+  box-sizing: border-box;
+  font-size: var(--fs-14);
+  color: var(--color-white);
+}
+.addressColumn,
+.addressDetails,
+.addressInfo {
+  display: flex;
+  align-items: flex-start;
+}
+.addressInfo {
+  width: auto;
+  min-width: 564px;
+  flex-direction: column;
+  gap: 21.6px;
+}
+.addressColumn {
+  width: auto;
+  min-width: 90px;
+  height: auto;
+  padding: var(--padding-0) var(--padding-0) var(--padding-0) 2.4px;
+  box-sizing: border-box;
+}
+.address {
+  height: auto;
+  width: auto;
+  min-width: 80px;
+  position: relative;
+  line-height: 99.9%;
+  text-transform: capitalize;
+  display: inline-block;
+  /* "Address:" label — 18 / Medium per Figma. */
+  font-size: var(--fs-18);
+  font-family: 'Mazzard H', var(--font-mazzard);
+  font-weight: 500;
+  white-space: nowrap;
+}
+.fullAddress {
+  width: auto;
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14.4px;
+  font-size: var(--fs-24);
+  color: var(--color-orange-100);
+}
+.bulgariaSofiaDragalevtsi {
+  margin: 0;
+  width: auto;
+  position: relative;
+  font-size: inherit;
+  line-height: 130%;
+  text-transform: capitalize;
+  font-weight: 500;            /* H Medium */
+  font-family: 'Mazzard H', var(--font-mazzard);
+  display: inline-block;
+}
+.bulgariaSofiaDragalevtsi span {
+  display: block;
+  white-space: nowrap;        /* each address line stays on ONE line */
+}
+.workingHoursMon {
+  width: auto;
+  position: relative;
+  font-size: var(--fs-14);
+  line-height: 1.4;
+  color: var(--color-gray-100);
+  display: inline-block;
+  white-space: nowrap;        /* "Working hours: Mon - Fri, 10.00 - 19.00" on one line */
+  font-family: 'Mazzard H', var(--font-mazzard);
+  font-weight: 500;
+}
+.socialColumn {
+  /* Two columns: Viber community block (left) and Social media block (right).
+     Use `space-between` instead of a fixed gap so both blocks size by their
+     content and the layout never breaks when admin tweaks copy length. */
+  width: 600px;
+  height: auto;
+  min-height: 94.9px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 64px;
+  z-index: 1;
+  font-size: var(--fs-14);
+  color: var(--color-white);
+}
+.socialInfo,
+.socialLabel {
+  width: auto;
+  /* Keep the label tight enough to break "Join Our Group And Get The Hottest
+     Offers:" into TWO lines (per Figma): big enough for "Get The Hottest
+     Offers:" on a single line, small enough to force the line break. */
+  max-width: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.socialInfo {
+  height: auto;
+  padding: 1.9px var(--padding-0) var(--padding-0);
+  box-sizing: border-box;
+}
+.socialLabel {
+  gap: var(--gap-14);
+}
+/* Viber "Join our group..." label — admin-managed copy. Two-line target
+   per Figma. 14px Mazzard H Medium for the public site footer. */
+.viberLabelText {
+  align-self: stretch;
+  position: relative;
+  font-size: var(--fs-14);
+  font-family: 'Mazzard H', var(--font-mazzard);
+  font-weight: 500;
+  line-height: 130%;
+  text-transform: capitalize;
+  white-space: normal;
+  word-break: keep-all;
+}
+/* "Social Media:" label */
+.socialMediaLabel {
+  align-self: stretch;
+  position: relative;
+  font-size: var(--fs-14);
+  font-family: 'Mazzard H', var(--font-mazzard);
+  font-weight: 500;
+  line-height: 99.9%;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+.basilviberOutlineIcon {
+  width: 45px;
+  position: relative;
+  max-height: 100%;
+}
+.socialIcons {
+  width: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gap-24);
+}
+.mediaIcons {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  gap: var(--gap-22);
+}
+.riinstagramLineIcon {
+  width: var(--width-32);
+  position: relative;
+  max-height: 100%;
+}
+/* ── Footer bottom strip (legal line) ─────────────────────────────────────
+ * Single row stretching the full width of the footer. Three logical
+ * sections separated by `justify-content: space-between`:
+ *   1. © 2026 ALL RIGHT RESERVED. BIBI CARS         (left)
+ *   2. VAT · ID · PM AUTO GROUP LTD · CONDITIONS · PRIVACY POLICY · COOKIES
+ *   3. / WEBSITE DESIGN - O.LA /                    (right, underlined)
+ * ────────────────────────────────────────────────────────────────────────── */
+.footerBottom {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 32px;
+  z-index: 1;
+  text-align: left;
+  font-size: var(--fs-14);
+  color: var(--color-white);
+  font-family: var(--font-mazzard);
+}
+.copyrightInfo {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  z-index: 3;
+  font-size: var(--fs-12);
+  flex-shrink: 0;
+}
+.antDesigncopyrightCircleOuIcon {
+  width: 18px;
+  height: 18px;
+  position: relative;
+}
+.allRightReserved {
+  position: relative;
+  line-height: 1;
+  text-transform: uppercase;
+  display: inline-block;
+  white-space: nowrap;
+}
+.companyInfo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 auto;
+  z-index: 1;
+}
+.vatBg206637283Parent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  flex-wrap: nowrap;
+}
+.pmAutoGroup {
+  position: relative;
+  line-height: 1;
+  text-transform: uppercase;
+  display: inline-block;
+  white-space: nowrap;
+}
+.policyLinks {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  text-align: center;
+}
+.conditions,
+.websiteDesign {
+  position: relative;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.websiteDesign {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-align: center;
+  display: inline-block;
+  flex-shrink: 0;
+  z-index: 2;
+  color: inherit;
+  cursor: pointer;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+.websiteDesign:hover { color: #FEAE00; }
+
+/* Stack the two website-credit lines (designer + made-with) vertically.
+   Each line keeps the original italic-like slash framing and underline. */
+.websiteCredits {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  flex-shrink: 0;
+  z-index: 2;
+  font-size: var(--fs-14);
+  color: var(--color-white);
+  font-family: var(--font-mazzard);
+  text-align: right;
+}
+
+/* Make the footer policy items look identical to the previous <Link> items —
+   the underlying class `.conditions` provides the typography, this one just
+   strips the default <button> chrome so it is visually indistinguishable. */
+.policyLinkBtn {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: color 0.15s ease;
+}
+.policyLinkBtn:hover { color: #FEAE00; }
+.policyLinkBtn:focus-visible {
+  outline: 2px solid rgba(254, 174, 0, 0.6);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+@media screen and (max-width: 1350px) {
+  .vatBg206637283Parent {
+    gap: 28px;
+  }
+  .policyLinks {
+    gap: 28px;
+  }
+}
+
+@media screen and (max-width: 925px) {
+  .footerBottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .companyInfo {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .vatBg206637283Parent {
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: flex-start;
+  }
+  .policyLinks {
+    gap: 16px;
+  }
+}

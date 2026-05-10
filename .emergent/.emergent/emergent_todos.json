@@ -1,0 +1,30 @@
+[
+  {
+    "content": "Backend: Add Korea profile defaults + seed (KOREA_PROFILE_CODE='korea_bg')",
+    "status": "completed"
+  },
+  {
+    "content": "Backend: Extend /api/calculator/calculate to accept origin=korea with Korea breakdown",
+    "status": "completed"
+  },
+  {
+    "content": "Backend: Add Korea endpoints (config profile, routes for korea_inland/sea_korea, vehicle types)",
+    "status": "completed"
+  },
+  {
+    "content": "Frontend Admin: Add Korea profile section with all 14+ editable fields and itemized/package toggle",
+    "status": "completed"
+  },
+  {
+    "content": "Frontend Admin: Add Korea routes section (Korea inland transport per vehicle type, sea shipping)",
+    "status": "completed"
+  },
+  {
+    "content": "Frontend Public CarCalculator: Add Origin toggle (USA/Korea) and Korea-aware form/breakdown",
+    "status": "completed"
+  },
+  {
+    "content": "Test backend + frontend end-to-end",
+    "status": "completed"
+  }
+]
