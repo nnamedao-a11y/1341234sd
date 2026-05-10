@@ -2452,27 +2452,51 @@ function MobileHowToBuyTurnkey() {
         minHeight: 1262,
       }}
     >
-      {/* ── Figma-supplied road background (extracted from Frame 1707479322.
-           This is image0_340_2643 — the raw aerial road photo WITHOUT any
-           text or logos; everything else (title, USA/Korea, auction logos,
-           steps, button, caption) is rendered as live React markup above it.
-           object-fit:cover preserves the road's natural aspect ratio so the
-           white side stripes and the central double-yellow lane lines stay
-           geometrically correct. ─────────────────────────────────────── */}
+      {/* ── Aerial road photo as full-bleed background ───────────────── */}
       <img
-        src="/figma/turnkey-road-bg.webp"
+        src="/figma/image-57@2x.webp"
         alt=""
         aria-hidden="true"
         style={{
           position: 'absolute',
           top: 0,
-          left: 0,
-          width: '100%',
+          left: '50%',
+          transform: 'translateX(-50%)',
           height: '100%',
+          width: 'auto',
+          minWidth: '100%',
           objectFit: 'cover',
           objectPosition: 'center top',
           pointerEvents: 'none',
           userSelect: 'none',
+        }}
+      />
+      {/* Top fade so the title remains legible on light asphalt */}
+      <div
+        aria-hidden
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: 220,
+          background:
+            'linear-gradient(180deg, rgba(10,10,10,0.85) 0%, rgba(10,10,10,0.55) 60%, rgba(10,10,10,0) 100%)',
+          pointerEvents: 'none',
+        }}
+      />
+      {/* Bottom fade for the CTA / Join card legibility */}
+      <div
+        aria-hidden
+        style={{
+          position: 'absolute',
+          left: 0,
+          right: 0,
+          bottom: 0,
+          height: 320,
+          background:
+            'linear-gradient(0deg, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.65) 55%, rgba(10,10,10,0) 100%)',
+          pointerEvents: 'none',
         }}
       />
 
