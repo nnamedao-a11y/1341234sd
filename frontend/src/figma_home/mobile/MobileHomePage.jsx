@@ -2955,44 +2955,24 @@ function MobileWeHavePerfectService() {
               textAlign: 'center',
             }}
           >
-            {/* Map-pin from Figma (Vector.svg + Ellipse 13).
-                Exact Figma dimensions: pin 18.27 × 23.31 (NOT square — has the
-                pointed tail), inner dot 10.16 × 10.16. The dot is rendered as
-                a black circle on top of a solid amber pin to produce the
-                cut-out effect that matches the figma mock. The circle centre
-                of the pin's head in the source SVG is at (9.14, 9.14) of a
-                19 × 24 viewBox → in the rendered 18.27 × 23.31 element that
-                falls at (~8.79, ~8.88). The 10.16 × 10.16 black dot is
-                centred on that point. */}
-            <div
-              aria-hidden="true"
+            {/* Map-pin — exact Figma asset (Vector.svg) with native dimensions
+                18.27 × 23.31 px. The cut-out hole is already baked into the
+                SVG (fill-rule="evenodd"), so it stays the proper Figma size
+                without any additional overlay. */}
+            <img
+              src="/figma/pin-vector.svg"
+              alt=""
+              width={18.27}
+              height={23.31}
               style={{
-                position: 'relative',
+                display: 'block',
                 width: 18.27,
                 height: 23.31,
                 marginBottom: 4,
                 flexShrink: 0,
               }}
-            >
-              <img
-                src="/figma/pin-solid.svg"
-                alt=""
-                width={18.27}
-                height={23.31}
-                style={{ display: 'block', width: 18.27, height: 23.31 }}
-              />
-              <span
-                style={{
-                  position: 'absolute',
-                  left: 8.79 - 10.16 / 2,
-                  top:  8.88 - 10.16 / 2,
-                  width: 10.16,
-                  height: 10.16,
-                  borderRadius: '50%',
-                  background: '#000000',
-                }}
-              />
-            </div>
+              aria-hidden="true"
+            />
 
             {/* Horizontal hairline — full width of the 328-px block */}
             <div
