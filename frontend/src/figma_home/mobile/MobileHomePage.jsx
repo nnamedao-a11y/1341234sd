@@ -2579,8 +2579,10 @@ function MobileHowToBuyTurnkey() {
            Figma: "from"/USA/Korea block is absolutely positioned at top:412
            from section start (rendered as a direct child of the relative
            section — see below). The flow spacer reserves the same vertical
-           space so that the auction-logos row stays at its Figma offset. */}
-        <div aria-hidden style={{ height: 345 }} />
+           space so that the auction-logos row stays at its Figma offset.
+           +60 px additional drop so the bottom of step 5 lands exactly 77 px
+           above the "Pick up the car" button (1023 − 77 = 946 px). */}
+        <div aria-hidden style={{ height: 345 + 60 }} />
 
         {/* ── Auction logos — real SVG assets, exact Figma positioning ─
              Row 1 (Copart 94×40 · IAAI 51×29 · CARFAX 93×17):
@@ -2708,16 +2710,20 @@ function MobileHowToBuyTurnkey() {
       </div>
 
       {/* ── "Pick up the car" CTA — absolutely positioned per Figma spec
-           top: 1023 px from the section/card start (the road background).
-           Width 294 = 361 (card content) − 34 (left pad) − 33 (right pad).
-           Height 45, Mazzard H Medium 14, uppercase, amber bg,
-           border-radius 16 px. ── */}
+           Layout (Figma DevMode):
+             • Top:    1023 px from card start
+             • Left:   34 px
+             • Width:  fixed 294 px
+             • Height: fixed 45 px
+             • Radius: 6 px
+           Typography: Mazzard H Medium 14, uppercase, amber bg. ── */}
       <div
         style={{
           position: 'absolute',
           top: 1023,
           left: 34,
-          right: 33,
+          width: 294,
+          height: 45,
           zIndex: 3,
         }}
       >
@@ -2726,13 +2732,13 @@ function MobileHowToBuyTurnkey() {
           data-testid="mobile-pick-up-the-car"
           style={{
             width: '100%',
-            height: 45,
+            height: '100%',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             background: '#FEAE00',
             border: 'none',
-            borderRadius: 16,
+            borderRadius: 6,
             color: '#000000',
             fontFamily: FONT,
             fontWeight: 500,
@@ -2827,7 +2833,7 @@ function MobileHowToBuyTurnkey() {
         data-testid="mobile-from-usa-korea"
         style={{
           position: 'absolute',
-          top: 412,
+          top: 412 + 60,
           left: 94,
           width: 180,
           zIndex: 2,
