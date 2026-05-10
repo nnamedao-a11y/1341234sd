@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef, useMemo } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { Car, Bike } from 'lucide-react';
 import { Clock, ArrowRight } from '@phosphor-icons/react';
 import MobileHeader from './MobileHeader';
@@ -2440,32 +2441,33 @@ function MobileHowWeWork() {
 
 
 /* ─────────────────────────────────────────────────────────────────────── */
-/* MobileHowToBuyTurnkey — "How to buy a turnkey car" mobile section
+/* MobileHowToBuyTurnkey — "How to buy a turnkey car" mobile adaptation
+ * of the desktop section (`figma_home/components/turnkey-banner1.jsx`).
+ * Uses the SAME assets as the web version:
+ *   • /figma/image-57@2x.webp  — aerial road background
+ *   • /figma/image-65@2x.webp  — Copart logo (94 × 40)
+ *   • /figma/image-71@2x.webp  — CARFAX logo (93 × 17)
+ *   • /figma/image-73@2x.webp  — IAA logo (51 × 29)
+ *   • /figma/image-76@2x.webp  — Manheim logo (118 × 29)
+ *   • /figma/image-81@2x.webp  — Encar logo (73 × 24)
+ *   • /figma/basil-viber-outline.svg — Viber icon (42 × 42)
  *
- * Geometry (per Figma DevMode @ 368 × 1256):
+ * Mobile geometry (per Figma DevMode @ 368 × 1256):
  *   • 28 px  top padding
- *   • 82 px  side padding around the title
- *   • Title "How to buy / a turnkey car" — Mazzard H Bold 32
- *   • Top-down car silhouette
- *   • "from" label — Mazzard H Bold 14, yellow
- *   • "USA/Korea" — Mazzard H Bold 32, white
- *   • Auction logos row (Copart, IAAI, CARFAX, Manheim, Encar)
- *   • 5-step list (block 328 × 276):
- *       — Yellow numerals "1/" — Mazzard H ExtraBold 20
- *       — White step text   — Mazzard H Bold 20
- *       — 40 px left padding for the numeral, 13 px gap to text
- *       — 18 px vertical gap between items
- *   • "Pick up the car" CTA — 294 × 45, Mazzard H Medium 14
- *       — 34 left / 33 right padding, 35 px below the steps
- *   • 175 px total gap from end of step 5 to "Join our group" caption
- *   • "Join our group and get the hottest offers" — Bold 16
- *       — 57 / 55 px side padding
- *   • 16 px gap to Viber icon (42 × 42)
+ *   • 82 px  side padding around the title (Mazzard H Bold 32)
+ *   • Title "How to buy / a turnkey car"
+ *   • Aerial photo of a car driving down the road shows through the bg
+ *   • "from"          — Mazzard H Bold 14, yellow
+ *   • "USA/Korea"     — Mazzard H Bold 32, white
+ *   • Auction logos: 2 rows centred on the road
+ *   • 5 numbered steps (block 328 × 276):
+ *       — yellow numerals "1/" — Mazzard H ExtraBold 20
+ *       — white step text      — Mazzard H Bold 20
+ *       — 40 px left, 13 px gap, 18 px between items
+ *   • "Pick up the car" CTA — 294 × 45, Mazzard H Medium 14, 34/33 pads
+ *   • "Join our group and get the hottest offers" — Bold 16, 57/55 pads
+ *   • Viber icon 42 × 42, 16 px after caption
  *   • 39 px bottom padding
- *
- * Asphalt road background w/ dashed yellow centre line is rendered in CSS.
- * Brand logos are rendered as inline styled SVG/text marks (no external
- * assets bundled yet — replace later with real artwork).
  * ─────────────────────────────────────────────────────────────────────── */
 function MobileHowToBuyTurnkey() {
   const FONT = "'Mazzard', 'Mazzard H', system-ui, -apple-system, sans-serif";
@@ -2490,37 +2492,55 @@ function MobileHowToBuyTurnkey() {
         width: '100%',
       }}
     >
-      {/* ── Asphalt + dashed centre yellow line ──────────────────────── */}
-      <div
-        aria-hidden
+      {/* ── Aerial road photo as full-bleed background ───────────────── */}
+      <img
+        src="/figma/image-57@2x.webp"
+        alt=""
+        aria-hidden="true"
         style={{
           position: 'absolute',
-          inset: 0,
-          backgroundColor: '#0E0E0E',
-          backgroundImage:
-            'radial-gradient(circle at 50% 0%, rgba(255,255,255,0.025), transparent 65%), radial-gradient(circle at 0% 50%, rgba(255,255,255,0.018), transparent 60%), radial-gradient(circle at 100% 80%, rgba(255,255,255,0.018), transparent 60%)',
+          top: 0,
+          left: '50%',
+          transform: 'translateX(-50%)',
+          height: '100%',
+          width: 'auto',
+          minWidth: '100%',
+          objectFit: 'cover',
+          objectPosition: 'center top',
           pointerEvents: 'none',
+          userSelect: 'none',
         }}
       />
+      {/* Top fade so the title remains legible on light asphalt */}
       <div
         aria-hidden
         style={{
           position: 'absolute',
           top: 0,
+          left: 0,
+          right: 0,
+          height: 220,
+          background:
+            'linear-gradient(180deg, rgba(10,10,10,0.85) 0%, rgba(10,10,10,0.55) 60%, rgba(10,10,10,0) 100%)',
+          pointerEvents: 'none',
+        }}
+      />
+      {/* Bottom fade for the CTA / Join card legibility */}
+      <div
+        aria-hidden
+        style={{
+          position: 'absolute',
+          left: 0,
+          right: 0,
           bottom: 0,
-          left: '50%',
-          transform: 'translateX(-50%)',
-          width: 6,
-          backgroundImage:
-            'linear-gradient(#FEAE00 50%, transparent 50%)',
-          backgroundSize: '6px 28px',
-          backgroundRepeat: 'repeat-y',
-          opacity: 0.85,
+          height: 320,
+          background:
+            'linear-gradient(0deg, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.65) 55%, rgba(10,10,10,0) 100%)',
           pointerEvents: 'none',
         }}
       />
 
-      {/* ── Content ──────────────────────────────────────────────────── */}
+      {/* ── Content (above bg) ───────────────────────────────────────── */}
       <div style={{ position: 'relative', zIndex: 1 }}>
         {/* Title */}
         <h2
@@ -2540,54 +2560,16 @@ function MobileHowToBuyTurnkey() {
           <br />a turnkey car
         </h2>
 
-        {/* Top-down car silhouette */}
-        <div
-          aria-hidden
-          style={{
-            marginTop: 56,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: 200,
-          }}
-        >
-          <svg
-            width="120"
-            height="200"
-            viewBox="0 0 120 200"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            style={{ display: 'block' }}
-          >
-            {/* Car body */}
-            <rect x="14" y="12" width="92" height="176" rx="22" fill="#E8E8EA" />
-            {/* Bonnet shadow */}
-            <rect x="20" y="20" width="80" height="60" rx="14" fill="#D2D4D7" />
-            {/* Windshield + roof */}
-            <path
-              d="M28 70 L92 70 C96 70 98 72 98 76 L98 124 C98 128 96 130 92 130 L28 130 C24 130 22 128 22 124 L22 76 C22 72 24 70 28 70 Z"
-              fill="#0F1115"
-              stroke="#2A2D33"
-              strokeWidth="1"
-            />
-            {/* Rear glass / trunk */}
-            <rect x="22" y="138" width="76" height="36" rx="10" fill="#D2D4D7" />
-            {/* Side mirrors */}
-            <rect x="6" y="74" width="10" height="14" rx="2" fill="#D2D4D7" />
-            <rect x="104" y="74" width="10" height="14" rx="2" fill="#D2D4D7" />
-            {/* Front lights */}
-            <rect x="22" y="14" width="12" height="6" rx="2" fill="#FEAE00" />
-            <rect x="86" y="14" width="12" height="6" rx="2" fill="#FEAE00" />
-            {/* Rear lights */}
-            <rect x="22" y="180" width="12" height="6" rx="2" fill="#C0392B" />
-            <rect x="86" y="180" width="12" height="6" rx="2" fill="#C0392B" />
-          </svg>
-        </div>
+        {/* Spacer where the car photo of the bg image sits.
+           The 393 px figure from Figma is "from"-label top relative to
+           section start. Title height ≈ 80 px + 28 px top padding ≈ 108
+           ⇒ remaining ≈ 285 px reserved for the car photo. */}
+        <div aria-hidden style={{ height: 285 }} />
 
-        {/* "from" label */}
+        {/* "from" label — Mazzard H Bold 14, yellow */}
         <div
           style={{
-            marginTop: 22,
+            padding: '0 169px 0 161px',
             textAlign: 'center',
             fontFamily: FONT,
             fontWeight: 700,
@@ -2600,7 +2582,7 @@ function MobileHowToBuyTurnkey() {
           from
         </div>
 
-        {/* USA/Korea */}
+        {/* USA/Korea — Mazzard H Bold 32, white */}
         <h3
           style={{
             margin: '6px 0 0',
@@ -2617,18 +2599,18 @@ function MobileHowToBuyTurnkey() {
           USA/Korea
         </h3>
 
-        {/* Auction logos — 2 rows */}
+        {/* ── Auction logos — real assets from /figma ─────────────────── */}
         <div
           style={{
-            marginTop: 36,
+            marginTop: 38,
+            padding: '0 24px',
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center',
             gap: 24,
-            padding: '0 24px',
+            alignItems: 'center',
           }}
         >
-          {/* Row 1: Copart · IAAI · CARFAX */}
+          {/* Row 1 — Copart 94×40 · IAAI 51×29 · CARFAX 93×17 */}
           <div
             style={{
               width: '100%',
@@ -2638,79 +2620,29 @@ function MobileHowToBuyTurnkey() {
               gap: 16,
             }}
           >
-            {/* Copart — 94 × 40 */}
-            <span
-              aria-label="Copart"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: 94,
-                height: 40,
-                fontFamily: FONT,
-                fontWeight: 700,
-                fontSize: 22,
-                fontStyle: 'italic',
-                color: '#1F4FA4',
-                background: '#FFFFFF',
-                borderRadius: 999,
-                letterSpacing: '-0.01em',
-              }}
-            >
-              Copart
-            </span>
-            {/* IAAI — 51 × 29 */}
-            <span
-              aria-label="IAAI"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: 51,
-                height: 29,
-                fontFamily: FONT,
-                fontWeight: 800,
-                fontSize: 18,
-                color: '#E10600',
-                letterSpacing: '0.02em',
-              }}
-            >
-              IAAI
-            </span>
-            {/* CARFAX — 93 × 17 */}
-            <span
-              aria-label="CARFAX"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: 1,
-                height: 17,
-                fontFamily: FONT,
-                fontWeight: 800,
-                fontSize: 12,
-                color: '#FFFFFF',
-                letterSpacing: '0.18em',
-              }}
-            >
-              {'CARFAX'.split('').map((ch, i) => (
-                <span
-                  key={i}
-                  style={{
-                    background: '#000',
-                    border: '1px solid #FFFFFF',
-                    padding: '0 2px',
-                    minWidth: 12,
-                    textAlign: 'center',
-                  }}
-                >
-                  {ch}
-                </span>
-              ))}
-            </span>
+            <img
+              src="/figma/image-65@2x.webp"
+              alt="Copart"
+              width={94}
+              height={40}
+              style={{ width: 94, height: 40, objectFit: 'contain', display: 'block' }}
+            />
+            <img
+              src="/figma/image-73@2x.webp"
+              alt="IAA — Insurance Auto Auctions"
+              width={51}
+              height={29}
+              style={{ width: 51, height: 29, objectFit: 'contain', display: 'block' }}
+            />
+            <img
+              src="/figma/image-71@2x.webp"
+              alt="CARFAX"
+              width={93}
+              height={17}
+              style={{ width: 93, height: 17, objectFit: 'contain', display: 'block' }}
+            />
           </div>
-
-          {/* Row 2: Manheim · Encar */}
+          {/* Row 2 — Manheim 118×29 · Encar 73×24 */}
           <div
             style={{
               width: '100%',
@@ -2720,70 +2652,24 @@ function MobileHowToBuyTurnkey() {
               gap: 16,
             }}
           >
-            {/* Manheim — 118 × 29 */}
-            <span
-              aria-label="Manheim"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 8,
-                height: 29,
-              }}
-            >
-              <span
-                style={{
-                  width: 22,
-                  height: 22,
-                  borderRadius: 999,
-                  background:
-                    'radial-gradient(circle at 35% 30%, #FFD24A, #C68A00 70%, #6A4900 100%)',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: '#1B1B1B',
-                  fontFamily: FONT,
-                  fontWeight: 800,
-                  fontSize: 14,
-                  lineHeight: 1,
-                }}
-              >
-                M
-              </span>
-              <span
-                style={{
-                  fontFamily: 'Georgia, "Times New Roman", serif',
-                  fontWeight: 400,
-                  fontSize: 22,
-                  color: '#FFFFFF',
-                  fontStyle: 'italic',
-                  letterSpacing: '0.005em',
-                }}
-              >
-                Manheim
-              </span>
-            </span>
-            {/* Encar — 73 × 24 (text) */}
-            <span
-              aria-label="Encar"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: 73,
-                height: 24,
-                fontFamily: FONT,
-                fontWeight: 800,
-                fontSize: 22,
-                color: '#E10600',
-                letterSpacing: '0.01em',
-              }}
-            >
-              Encar
-            </span>
+            <img
+              src="/figma/image-76@2x.webp"
+              alt="Manheim"
+              width={118}
+              height={29}
+              style={{ width: 118, height: 29, objectFit: 'contain', display: 'block' }}
+            />
+            <img
+              src="/figma/image-81@2x.webp"
+              alt="Encar"
+              width={73}
+              height={24}
+              style={{ width: 73, height: 24, objectFit: 'contain', display: 'block' }}
+            />
           </div>
         </div>
 
-        {/* ── Steps block — 328 × 276 (40 left, 18 gap, 13 number↔text) ─ */}
+        {/* ── Steps block — 328 × 276 (40 left, 18 gap, 13 num↔text) ── */}
         <div
           style={{
             marginTop: 60,
@@ -2832,14 +2718,17 @@ function MobileHowToBuyTurnkey() {
           ))}
         </div>
 
-        {/* ── "Pick up the car" CTA — 294 × 45, 34 left / 33 right ───── */}
+        {/* ── "Pick up the car" CTA — 294 × 45, Medium 14, 34/33 pads ── */}
         <div style={{ marginTop: 35, padding: '0 33px 0 34px' }}>
-          <button
-            type="button"
+          <Link
+            to="/calculator"
             data-testid="mobile-pick-up-the-car"
             style={{
               width: '100%',
               height: 45,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
               background: '#FEAE00',
               border: 'none',
               color: '#000000',
@@ -2848,15 +2737,16 @@ function MobileHowToBuyTurnkey() {
               fontSize: 14,
               letterSpacing: '0.18em',
               textTransform: 'uppercase',
-              cursor: 'pointer',
+              textDecoration: 'none',
+              boxSizing: 'border-box',
             }}
           >
             Pick up the car
-          </button>
+          </Link>
         </div>
 
-        {/* ── 175 px total from end of step 5 to "Join our group".
-             Already used 35 (gap) + 45 (button) = 80 px → remaining 95 px ── */}
+        {/* ── 175 px from end of step 5 to "Join our group" ─────────────
+             35 px (gap above button) + 45 px (button) = 80 px → +95 px ── */}
         <div
           style={{
             marginTop: 95,
@@ -2894,7 +2784,7 @@ function MobileHowToBuyTurnkey() {
             }}
           >
             <img
-              src="/mobile/basil-viber-outline.svg"
+              src="/figma/basil-viber-outline.svg"
               alt=""
               width={42}
               height={42}
