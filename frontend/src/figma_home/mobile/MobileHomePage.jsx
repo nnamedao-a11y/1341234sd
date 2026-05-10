@@ -2166,6 +2166,11 @@ function MobileCalculateCar() {
  * ─────────────────────────────────────────────────────────────────────── */
 function MobileHowWeWork() {
   const FONT = "'Mazzard', 'Mazzard H', system-ui, -apple-system, sans-serif";
+  // Helvetica Now / New Display — corporate body font for cards.
+  // Local face is not bundled, so we fall back to Helvetica Neue / Helvetica /
+  // Arial which match the metrics closely on iOS/macOS/Android.
+  const HELV =
+    "'Helvetica Now Display', 'Helvetica Neue', Helvetica, Arial, sans-serif";
 
   const PLANS = [
     {
@@ -2176,8 +2181,6 @@ function MobileHowWeWork() {
       accent: 'From there, you handle\neverything yourself.',
       popular: false,
       yellow: false,
-      width: 328,
-      height: 279,
     },
     {
       key: 'turnkey',
@@ -2188,8 +2191,6 @@ function MobileHowWeWork() {
       accent: 'You simply pick up\na ready-to-drive car.',
       popular: true,
       yellow: true,
-      width: 327,
-      height: 274,
     },
     {
       key: 'sourcing',
@@ -2200,8 +2201,6 @@ function MobileHowWeWork() {
         'You handle registration - we\nconnect you with trusted service\npartners.',
       popular: false,
       yellow: false,
-      width: 335,
-      height: 283,
     },
   ];
 
@@ -2209,7 +2208,7 @@ function MobileHowWeWork() {
     <section
       data-testid="mobile-how-we-work"
       style={{
-        padding: '62px 0 43px',
+        padding: '62px 0 0',
         background: '#000',
         boxSizing: 'border-box',
         width: '100%',
@@ -2258,14 +2257,14 @@ function MobileHowWeWork() {
         </p>
       </div>
 
-      {/* ── Cards — 17 px sides, 17 px gap between ───────────────────── */}
+      {/* ── Cards — 17 px sides, 43 px gap between, 91 px gap from sub-title ─ */}
       <div
         style={{
-          marginTop: 28,
+          marginTop: 91,
           padding: '0 17px',
           display: 'flex',
           flexDirection: 'column',
-          gap: 17,
+          gap: 43,
           boxSizing: 'border-box',
         }}
       >
@@ -2277,7 +2276,7 @@ function MobileHowWeWork() {
           const descColor = p.yellow
             ? '#000000'
             : p.key === 'sourcing'
-              ? '#9a9a96'
+              ? '#FFFFFF'
               : '#FFFFFF';
           const accentColor = p.yellow ? '#000000' : '#FEAE00';
 
@@ -2291,7 +2290,6 @@ function MobileHowWeWork() {
                 borderRadius: 0,
                 padding: '24px 24px 26px',
                 position: 'relative',
-                minHeight: p.height,
                 boxSizing: 'border-box',
                 fontFamily: FONT,
                 /* leather-like noise on dark cards (subtle) */
@@ -2320,8 +2318,8 @@ function MobileHowWeWork() {
                     style={{
                       color: numColor,
                       fontFamily: FONT,
-                      fontWeight: 400,
-                      fontSize: 22,
+                      fontWeight: 600,
+                      fontSize: 13,
                       lineHeight: 1,
                       letterSpacing: '0.02em',
                     }}
@@ -2333,8 +2331,8 @@ function MobileHowWeWork() {
                       margin: 0,
                       fontFamily: FONT,
                       fontWeight: 700,
-                      fontSize: 22,
-                      lineHeight: '26px',
+                      fontSize: 24,
+                      lineHeight: '28px',
                       color: titleColor,
                       whiteSpace: 'pre-line',
                       letterSpacing: '-0.005em',
@@ -2347,17 +2345,22 @@ function MobileHowWeWork() {
                 {p.popular && (
                   <span
                     style={{
-                      border: '1px solid rgba(0,0,0,0.55)',
-                      padding: '4px 10px',
-                      borderRadius: 0,
+                      width: 64,
+                      height: 32,
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      border: '1px solid rgba(0,0,0,0.85)',
+                      borderRadius: 16,
                       color: '#000000',
                       fontFamily: FONT,
                       fontWeight: 500,
-                      fontSize: 11,
+                      fontSize: 12,
                       lineHeight: '14px',
                       textTransform: 'lowercase',
                       letterSpacing: '0.02em',
                       flexShrink: 0,
+                      boxSizing: 'border-box',
                     }}
                   >
                     popular
@@ -2365,14 +2368,14 @@ function MobileHowWeWork() {
                 )}
               </div>
 
-              {/* Description */}
+              {/* Description (Helvetica Now/New Display Regular 18) */}
               <p
                 style={{
-                  margin: '0 0 18px',
-                  fontFamily: FONT,
-                  fontWeight: 500,
-                  fontSize: 14,
-                  lineHeight: '20px',
+                  margin: '0 0 22px',
+                  fontFamily: HELV,
+                  fontWeight: 400,
+                  fontSize: 18,
+                  lineHeight: '24px',
                   color: descColor,
                   whiteSpace: 'pre-line',
                 }}
@@ -2380,14 +2383,14 @@ function MobileHowWeWork() {
                 {p.desc}
               </p>
 
-              {/* Accent highlight */}
+              {/* Accent highlight (Helvetica Now/New Display Bold 18) */}
               <p
                 style={{
                   margin: 0,
-                  fontFamily: FONT,
+                  fontFamily: HELV,
                   fontWeight: 700,
-                  fontSize: 15,
-                  lineHeight: '20px',
+                  fontSize: 18,
+                  lineHeight: '24px',
                   color: accentColor,
                   whiteSpace: 'pre-line',
                 }}
@@ -2418,7 +2421,8 @@ function MobileHowWeWork() {
         <div
           data-testid="mobile-have-a-question"
           style={{
-            marginTop: 17,
+            marginTop: 31, /* 43 (gap) + 31 = 74 px from end of last plan card */
+            marginBottom: 43, /* bottom padding to next section */
             background: '#000000',
             border: '1px solid #FEAE00',
             borderRadius: 8,
