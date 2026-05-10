@@ -2501,9 +2501,10 @@ function MobileHowToBuyTurnkey() {
         overflow: 'hidden',
         boxSizing: 'border-box',
         width: '100%',
-        // Reserve enough height so the absolutely-positioned "Pick up the car"
-        // button (top: 1023, height: 45) + bottom padding (39) always fit.
-        minHeight: 1023 + 45 + 39,
+        // Total card height per Figma = 1262 px:
+        //   button top 1023 + 45 + 53 (gap) + 44 (2-line caption) + 16 (gap)
+        //   + 42 (viber) + 39 (bottom padding) = 1262
+        minHeight: 1262,
       }}
     >
       {/* ── Aerial road photo as full-bleed background ───────────────── */}
@@ -2704,58 +2705,13 @@ function MobileHowToBuyTurnkey() {
           ))}
         </div>
 
-        {/* ── "Join our group" caption — sits right below the steps ── */}
-        <div
-          style={{
-            marginTop: 40,
-            padding: '0 55px 0 57px',
-            textAlign: 'center',
-            fontFamily: FONT,
-            fontWeight: 700,
-            fontSize: 16,
-            lineHeight: '22px',
-            color: '#FFFFFF',
-          }}
-        >
-          Join our group and get the hottest offers
-        </div>
-
-        {/* ── Viber icon — 42 × 42, exactly 16 px below the caption ── */}
-        <div
-          style={{
-            marginTop: 16,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <a
-            href="viber://chat?number=%2B359875313158"
-            aria-label="Join our Viber group"
-            style={{
-              width: 42,
-              height: 42,
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              textDecoration: 'none',
-            }}
-          >
-            <img
-              src="/figma/basil-viber-outline.svg"
-              alt=""
-              width={42}
-              height={42}
-              style={{ display: 'block' }}
-            />
-          </a>
-        </div>
       </div>
 
       {/* ── "Pick up the car" CTA — absolutely positioned per Figma spec
            top: 1023 px from the section/card start (the road background).
            Width 294 = 361 (card content) − 34 (left pad) − 33 (right pad).
-           Height 45, Mazzard H Medium 14, uppercase, amber bg. ── */}
+           Height 45, Mazzard H Medium 14, uppercase, amber bg,
+           border-radius 16 px. ── */}
       <div
         style={{
           position: 'absolute',
@@ -2776,10 +2732,12 @@ function MobileHowToBuyTurnkey() {
             justifyContent: 'center',
             background: '#FEAE00',
             border: 'none',
+            borderRadius: 16,
             color: '#000000',
             fontFamily: FONT,
             fontWeight: 500,
             fontSize: 14,
+            lineHeight: '17px',
             letterSpacing: '0.18em',
             textTransform: 'uppercase',
             textDecoration: 'none',
@@ -2788,6 +2746,69 @@ function MobileHowToBuyTurnkey() {
         >
           Pick up the car
         </Link>
+      </div>
+
+      {/* ── "Join our group" caption — 53 px BELOW the Pick-up-the-car
+           button (button top = 1023, height 45 → text top = 1023+45+53 = 1121).
+           Absolutely positioned so it sits AFTER the button per Figma. ── */}
+      <div
+        data-testid="mobile-join-our-group"
+        style={{
+          position: 'absolute',
+          top: 1023 + 45 + 53,
+          left: 0,
+          right: 0,
+          padding: '0 55px 0 57px',
+          textAlign: 'center',
+          fontFamily: FONT,
+          fontWeight: 700,
+          fontSize: 16,
+          lineHeight: '22px',
+          color: '#FFFFFF',
+          zIndex: 3,
+          boxSizing: 'border-box',
+        }}
+      >
+        Join our group and get the hottest offers
+      </div>
+
+      {/* ── Viber icon — 42 × 42, exactly 16 px BELOW the caption.
+           Caption (2 lines × 22 px = 44 px) → icon top = 1121 + 44 + 16 = 1181.
+           After icon (42 px) → bottom of icon at 1181 + 42 = 1223.
+           Section bottom = 1223 + 39 (bottom padding) = 1262 (matches Figma). ── */}
+      <div
+        data-testid="mobile-viber-icon"
+        style={{
+          position: 'absolute',
+          top: 1023 + 45 + 53 + 44 + 16, // 1181
+          left: 0,
+          right: 0,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          zIndex: 3,
+        }}
+      >
+        <a
+          href="viber://chat?number=%2B359875313158"
+          aria-label="Join our Viber group"
+          style={{
+            width: 42,
+            height: 42,
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            textDecoration: 'none',
+          }}
+        >
+          <img
+            src="/figma/basil-viber-outline.svg"
+            alt=""
+            width={42}
+            height={42}
+            style={{ display: 'block' }}
+          />
+        </a>
       </div>
 
       {/* ── "from / USA/Korea" — absolutely positioned per Figma ──
