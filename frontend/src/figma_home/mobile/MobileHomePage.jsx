@@ -331,33 +331,91 @@ export default function MobileHomePage() {
       {/* ═════════ WE HAVE PERFECT SERVICE — replaces former Reviews block ═════════ */}
       <MobileWeHavePerfectService />
 
-      {/* ═════════ DREAM CAR CTA ═════════ */}
-      <section className="px-4 pb-12">
-        <div className="relative rounded-md overflow-hidden bg-[#0e0e0e] border border-[#1c1c1c]">
+      {/* ═════════ DREAM CAR CTA ═════════
+           Full-bleed image (360 × 334) with BIBI logo + headline
+           overlaid on top, per Figma DevMode:
+             • Logo  77 × 26.25 px  →  left 139, right 144, top 203
+             • Title frame 231 × 48 →  left 68, right 61, bottom 23
+             • Title H Bold Mazzard 24 px
+       ═════════════════════════════════ */}
+      <section className="pb-12">
+        <div
+          data-testid="mobile-dream-car-cta"
+          style={{
+            position: 'relative',
+            width: '100%',
+            aspectRatio: '360 / 334',
+            overflow: 'hidden',
+            background: '#0e0e0e',
+          }}
+        >
+          {/* Background photo — full-bleed cover */}
           <img
             src="/mobile/young-woman-with-salesman-carshowroom-1@2x.png"
             alt=""
-            className="w-full h-auto block opacity-80"
+            style={{
+              position: 'absolute',
+              inset: 0,
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              display: 'block',
+            }}
             loading="lazy"
-            onError={(e) => {
-              e.currentTarget.style.display = 'none';
+            onError={(e) => { e.currentTarget.style.display = 'none'; }}
+          />
+
+          {/* BIBI logo — 77 × 26.25, top 203, centred (left 139, right 144) */}
+          <img
+            src="/mobile/BiBi-logo-02-1.svg"
+            alt="BIBI"
+            data-testid="mobile-dream-car-cta-logo"
+            style={{
+              position: 'absolute',
+              top: 203,
+              left: 139,
+              width: 77,
+              height: 26.25,
+              zIndex: 2,
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-          <div className="relative z-10 p-6">
-            <img src="/mobile/BiBi-logo-02-1.svg" alt="BIBI" className="h-7 mb-4" />
-            <h2 className="text-[24px] leading-[28px] font-bold uppercase text-white">
-              Want to drive<br />
-              <span className="text-[#FEAE00]">your dream car?</span>
-            </h2>
-          </div>
+
+          {/* Headline — frame 231 × 48, bottom 23, H Bold Mazzard 24 */}
+          <h2
+            data-testid="mobile-dream-car-cta-title"
+            style={{
+              position: 'absolute',
+              bottom: 23,
+              left: 68,
+              right: 61,
+              width: 231,
+              height: 48,
+              margin: 0,
+              fontFamily: "'Mazzard', 'Mazzard H', system-ui, -apple-system, sans-serif",
+              fontWeight: 700,
+              fontSize: 24,
+              lineHeight: '24px',
+              textTransform: 'uppercase',
+              textAlign: 'center',
+              letterSpacing: 0,
+              zIndex: 2,
+            }}
+          >
+            <span style={{ color: '#FEAE00', display: 'block', whiteSpace: 'nowrap' }}>Want to drive</span>
+            <span style={{ color: '#FFFFFF', display: 'block', whiteSpace: 'nowrap' }}>your dream car?</span>
+          </h2>
         </div>
-        <a
-          href="/contacts"
-          className="mt-5 block w-full text-center h-12 leading-[48px] bg-[#FEAE00] text-black font-bold uppercase tracking-[0.2em] text-[13px] rounded hover:brightness-110 transition"
-        >
-          CONTACT US
-        </a>
+
+        {/* CONTACT US button — kept below the card, full-width with side padding */}
+        <div className="px-4">
+          <a
+            href="/contacts"
+            data-testid="mobile-dream-car-cta-button"
+            className="mt-5 block w-full text-center h-12 leading-[48px] bg-[#FEAE00] text-black font-bold uppercase tracking-[0.2em] text-[13px] rounded hover:brightness-110 transition"
+          >
+            CONTACT US
+          </a>
+        </div>
       </section>
 
       {/* ═════════ FAQ ═════════ */}
