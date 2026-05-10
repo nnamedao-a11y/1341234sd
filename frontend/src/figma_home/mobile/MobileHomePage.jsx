@@ -2480,6 +2480,17 @@ function MobileHowToBuyTurnkey() {
     'We clear customs and\ndeliver the car to Bulgaria',
   ];
 
+  // Figma DevMode geometry (card 368 × 1256):
+  //   • Title padding-top                = 28
+  //   • Title side padding (left/right)  = 82
+  //   • Title font-size                  = 32
+  //   • USA/Korea: top=412, left=94, width=180 (right edge = 87 from card edge)
+  //   • Steps inter-item gap             = 18
+  //   • "Join our group" caption — comes AFTER steps
+  //   • Viber icon gap from caption      = 16
+  //   • "Pick up the car" button gap from caption/icon block = 53
+  //   • Pick up the car BUTTON absolute top from card start  = 1023
+  //   • Bottom padding                   = 39
   return (
     <section
       data-testid="mobile-how-to-buy-turnkey"
@@ -2490,6 +2501,9 @@ function MobileHowToBuyTurnkey() {
         overflow: 'hidden',
         boxSizing: 'border-box',
         width: '100%',
+        // Reserve enough height so the absolutely-positioned "Pick up the car"
+        // button (top: 1023, height: 45) + bottom padding (39) always fit.
+        minHeight: 1023 + 45 + 39,
       }}
     >
       {/* ── Aerial road photo as full-bleed background ───────────────── */}
@@ -2690,38 +2704,10 @@ function MobileHowToBuyTurnkey() {
           ))}
         </div>
 
-        {/* ── "Pick up the car" CTA — 294 × 45, Medium 14, 34/33 pads ── */}
-        <div style={{ marginTop: 35, padding: '0 33px 0 34px' }}>
-          <Link
-            to="/calculator"
-            data-testid="mobile-pick-up-the-car"
-            style={{
-              width: '100%',
-              height: 45,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              background: '#FEAE00',
-              border: 'none',
-              color: '#000000',
-              fontFamily: FONT,
-              fontWeight: 500,
-              fontSize: 14,
-              letterSpacing: '0.18em',
-              textTransform: 'uppercase',
-              textDecoration: 'none',
-              boxSizing: 'border-box',
-            }}
-          >
-            Pick up the car
-          </Link>
-        </div>
-
-        {/* ── 175 px from end of step 5 to "Join our group" ─────────────
-             35 px (gap above button) + 45 px (button) = 80 px → +95 px ── */}
+        {/* ── "Join our group" caption — sits right below the steps ── */}
         <div
           style={{
-            marginTop: 95,
+            marginTop: 40,
             padding: '0 55px 0 57px',
             textAlign: 'center',
             fontFamily: FONT,
@@ -2734,7 +2720,7 @@ function MobileHowToBuyTurnkey() {
           Join our group and get the hottest offers
         </div>
 
-        {/* ── Viber icon — 42 × 42, 16 px below caption, 39 px to bottom ── */}
+        {/* ── Viber icon — 42 × 42, exactly 16 px below the caption ── */}
         <div
           style={{
             marginTop: 16,
@@ -2764,6 +2750,44 @@ function MobileHowToBuyTurnkey() {
             />
           </a>
         </div>
+      </div>
+
+      {/* ── "Pick up the car" CTA — absolutely positioned per Figma spec
+           top: 1023 px from the section/card start (the road background).
+           Width 294 = 361 (card content) − 34 (left pad) − 33 (right pad).
+           Height 45, Mazzard H Medium 14, uppercase, amber bg. ── */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 1023,
+          left: 34,
+          right: 33,
+          zIndex: 3,
+        }}
+      >
+        <Link
+          to="/calculator"
+          data-testid="mobile-pick-up-the-car"
+          style={{
+            width: '100%',
+            height: 45,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: '#FEAE00',
+            border: 'none',
+            color: '#000000',
+            fontFamily: FONT,
+            fontWeight: 500,
+            fontSize: 14,
+            letterSpacing: '0.18em',
+            textTransform: 'uppercase',
+            textDecoration: 'none',
+            boxSizing: 'border-box',
+          }}
+        >
+          Pick up the car
+        </Link>
       </div>
 
       {/* ── "from / USA/Korea" — absolutely positioned per Figma ──
