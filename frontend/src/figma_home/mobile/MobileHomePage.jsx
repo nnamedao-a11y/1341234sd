@@ -2316,15 +2316,21 @@ function MobileHowWeWork() {
                 >
                   <span
                     style={{
+                      width: 39,
+                      height: 25,
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
                       color: numColor,
                       fontFamily: FONT,
-                      fontWeight: 600,
-                      fontSize: 13,
                       lineHeight: 1,
-                      letterSpacing: '0.02em',
+                      flexShrink: 0,
+                      letterSpacing: 0,
                     }}
                   >
-                    [&nbsp;{p.num}&nbsp;]
+                    <span style={{ fontWeight: 400, fontSize: 25, lineHeight: 1 }}>[</span>
+                    <span style={{ fontWeight: 600, fontSize: 13, lineHeight: 1 }}>{p.num}</span>
+                    <span style={{ fontWeight: 400, fontSize: 25, lineHeight: 1 }}>]</span>
                   </span>
                   <h3
                     style={{
